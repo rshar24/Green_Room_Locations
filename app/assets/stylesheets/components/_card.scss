@@ -1,0 +1,27 @@
+.card-img {
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  border: 2px solid #e7e7e7;
+  border-radius: 4px;
+  padding: .5rem;
+  color: white;
+  font-size: 100px;
+
+}
+
+.card-btn {
+  background-color: #58c6dabf;
+  border-color: #58c6da5e;
+  bottom: 0px;
+  right: 0px;
+  color: white;
+  font-weight:lighter;
+}
+
+.card-action {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 20px;
+    align-items: center;
+}
