@@ -15,7 +15,7 @@
           <%= link_to "Home", root_path, class: "nav-link" %>
         </li>
         <li class="nav-item">
-          <%= link_to "Locations", "#", class: "nav-link" %>
+          <%= link_to "Locations", locations_path, class: "nav-link" %>
         </li>
         <li class="nav-item dropdown">
           <%= link_to "Dashboard", "#", class: "nav-link" %>
@@ -30,6 +30,9 @@
       <% else %>
         <li class="nav-item">
           <%= link_to "Login", new_user_session_path, class: "nav-link nav-login" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Sign up", new_user_registration_path, class: "nav-link nav-login" %>
         </li>
       <% end %>
     </ul>
