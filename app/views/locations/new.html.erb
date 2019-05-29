@@ -1,2 +1,22 @@
-<h1>Locations#new</h1>
-<p>Find me in app/views/locations/new.html.erb</p>
+<div style="background-image: url('https://images.pexels.com/photos/509922/pexels-photo-509922.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260');">
+  <div class="container">
+    <div class="mb-3">
+        <div class="new-form">
+          <h2>Add new location</h2>
+          <%= simple_form_for(@location) do |f| %>
+            <%= f.error_notification %>
+
+            <div class="form-inputs">
+              <%= f.input :name %>
+              <%= f.input :address %>
+              <%= f.input :price %>
+              <%= f.input :description %>
+              <%= f.input :cover %>
+              <%= f.input :cover_cache, as: :hidden %>
+              <%= f.button :submit, class: "text-white btn btn-primary" %>
+            </div>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</div>
