@@ -6,6 +6,7 @@ class LocationsController < ApplicationController
   def show
     @location = Location.find(params[:id])
     @main = @location.photos.find_by(main: true)
+    @booking = Booking.new
   end
 
   def new
@@ -16,6 +17,7 @@ class LocationsController < ApplicationController
     @location = Location.new(location_params)
     @location.create
   end
+
   def edit
     @location = Location.find(params[:id])
   end
