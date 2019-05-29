@@ -1,3 +1,8 @@
+<%= simple_form_for [@location, @review] do |f| %>
+  <%= f.input :content %>
+  <%= f.submit "add a review", class: "btn btn-primary" %>
+<% end %>
+
 <div class="d-flex">
   <div class="big-name">
     <p><%= @location.name %></p>
@@ -33,6 +38,3 @@
     <% end %>
   </div>
 </div>
-
-
-
