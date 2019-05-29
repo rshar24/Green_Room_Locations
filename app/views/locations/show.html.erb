@@ -1,0 +1,38 @@
+<div class="d-flex">
+  <div class="big-name">
+    <p><%= @location.name %></p>
+  </div>
+  <div class="show-img text-right pr-5" style="background-image: url('<%= @main.url %>');">
+    <a href="#" class="show-btn btn btn-primary text-right">Photos</a>
+  </div>
+</div>
+
+<div class="d-flex px-3 py-4" style="background-color: white;">
+  <div class="col-4 justify-content-end">
+    <h4>Description</h4>
+    <h5 class="body-text"><%= @location.description %></h5>
+  </div>
+  <div class="col-4 text-right">
+    <h4>Location rented by</h4>
+    <%= cl_image_tag @location.user.photo, height: 45, width: 45, :crop=>"thumb", :gravity=>"faces", :radius=>"max" %>
+
+    <h5 class="body-text"><%= @location.user.first_name %> <%= @location.user.last_name %></h5>
+  </div>
+  <div class="col-4 text-right pr-4">
+    <img src="https://previews.123rf.com/images/slanapotam/slanapotam1507/slanapotam150700034/43580117-march-2016-simple-european-calendar-for-2016-year-one-month-grid-clean-and-neat-only-plain-colors-ea.jpg" alt="" class="calendar-img">
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <% @location.photos.each do |photo| %>
+    <div class="col-4 mt-2 ">
+      <div class="card-img" style="background-image: url('<%= photo.url %>');">
+      </div>
+    </div>
+    <% end %>
+  </div>
+</div>
+
+
+
