@@ -5,7 +5,6 @@ class LocationsController < ApplicationController
 
   def show
     @location = Location.find(params[:id])
-    @main = @location.photos.find_by(main: true)
     @booking = Booking.new
   end
 
@@ -13,9 +12,15 @@ class LocationsController < ApplicationController
     @location = Location.new
   end
 
-  def ceate
+  def create
     @location = Location.new(location_params)
-    @location.create
+    @location.user = current_user
+
+    if @location.save
+      redirect_to location_path(@location)
+    else
+      render :new
+    end
   end
 
   def edit
@@ -29,6 +34,6 @@ class LocationsController < ApplicationController
   end
 
   def location_params
-    params.require(:location).permit(:name, :address, :price, :descripion)
+    params.require(:location).permit(:name, :address, :price, :description, :cover)
   end
 end
