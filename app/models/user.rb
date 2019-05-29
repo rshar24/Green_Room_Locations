@@ -8,4 +8,5 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :photo, presence: true
   has_many  :bookings
+  has_many  :locations
 end

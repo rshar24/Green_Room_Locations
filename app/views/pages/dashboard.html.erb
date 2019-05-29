@@ -1,0 +1,11 @@
+<div class="container">
+  <h3 class="mt-4">My Locations</h3>
+  <% @locations.each do |location| %>
+    <%= location.name %>
+  <% end %>
+  <% if policy(Location).create? %>
+    <%= link_to "New Location", new_location_path %>
+  <% end %>
+  <h3 class="mt-4">Bookings Received</h3>
+  <h3 class="mt-4">Bookings Made</h3>
+</div>
