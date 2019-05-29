@@ -14,6 +14,8 @@
   </div>
   <div class="col-4 text-right">
     <h4>Location rented by</h4>
+    <%= cl_image_tag @location.user.photo, height: 45, width: 45, :crop=>"thumb", :gravity=>"faces", :radius=>"max" %>
+
     <h5 class="body-text"><%= @location.user.first_name %> <%= @location.user.last_name %></h5>
   </div>
   <div class="col-4 text-right pr-4">
