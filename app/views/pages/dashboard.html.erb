@@ -1,39 +1,56 @@
 <div class="container">
-  <h3 class="mt-4">My Locations</h3>
-  <% @locations.each do |location| %>
-    <%= link_to location_path(location), { class: "nounderline" } do %>
-      <div class="card-product my-2">
-        <%= cl_image_tag location.cover, class: "img" %>
-        <div class="card-product-infos nounderline">
-          <h2><%= location.name %></h2>
-          <p><%= location.address %></p>
-          <p>Daily price: <i class="fas fa-rupee-sign"></i> <%= location.price %></p>
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="location-tab" data-toggle="tab" href="#location" role="tab" aria-controls="location" aria-selected="true">My Locations</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="bookings-made-tab" data-toggle="tab" href="#bookings-made" role="tab" aria-controls="bookings-made" aria-selected="false">Booking Made</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="bookings-received-tab" data-toggle="tab" href="#bookings-received" role="tab" aria-controls="bookings-received" aria-selected="false">Bookings Received</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="location" role="tabpanel" aria-labelledby="location-tab">
+    <h3 class="mt-4">My Locations</h3>
+    <% @locations.each do |location| %>
+      <%= link_to location_path(location), { class: "nounderline" } do %>
+        <div class="card-product my-2">
+          <%= cl_image_tag location.cover, class: "img" %>
+          <div class="card-product-infos nounderline">
+            <h2><%= location.name %></h2>
+            <p><%= location.address %></p>
+            <p>Daily price: <i class="fas fa-rupee-sign"></i> <%= location.price %></p>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  <% end %>
-  <% if policy(Location).create? %>
-    <%= link_to "New Location", new_location_path %>
-  <% end %>
-
-  <h3 class="mt-4">Bookings Received</h3>
-  <% @bookings_rec.each do |booking| %>
-    <%= link_to booking_path(booking), { class: "nounderline" } do %>
-    <div class="card-product my-2">
-      <%= cl_image_tag booking.location.cover, class: "img" %>
-      <div class="card-product-infos nounderline">
-        <h2><%= booking.location.name %></h2>
-        <p><%= booking.location.address %></p>
-        <p>Booked for: <%= booking.entry_date %> - <%= booking.exit_date %></p>
-        <p>Total price: <i class="fas fa-rupee-sign"></i> <%= booking.booking_price %></p>
-      </div>
-    </div>
+    <% if policy(Location).create? %>
+      <%= link_to "New Location", new_location_path %>
     <% end %>
-  <% end %>
+  </div>
 
-  <h3 class="mt-4">Bookings Made</h3>
-  <% @bookings_made.each do |booking| %>
-    <%= link_to booking_path(booking), { class: "nounderline" } do %>
+  <div class="tab-pane fade" id="bookings-made" role="tabpanel" aria-labelledby="bookings-made-tab">
+    <h3 class="mt-4">Bookings Made</h3>
+    <% @bookings_made.each do |booking| %>
+      <%= link_to booking_path(booking), { class: "nounderline" } do %>
+        <div class="card-product my-2">
+          <%= cl_image_tag booking.location.cover, class: "img" %>
+          <div class="card-product-infos nounderline">
+            <h2><%= booking.location.name %></h2>
+            <p><%= booking.location.address %></p>
+            <p>Booked for: <%= booking.entry_date %> - <%= booking.exit_date %></p>
+            <p>Total price: <i class="fas fa-rupee-sign"></i> <%= booking.booking_price %></p>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="tab-pane fade" id="bookings-received" role="tabpanel" aria-labelledby="bookings-received-tab">
+    <h3 class="mt-4">Bookings Received</h3>
+    <% @bookings_rec.each do |booking| %>
+      <%= link_to booking_path(booking), { class: "nounderline" } do %>
       <div class="card-product my-2">
         <%= cl_image_tag booking.location.cover, class: "img" %>
         <div class="card-product-infos nounderline">
@@ -43,6 +60,14 @@
           <p>Total price: <i class="fas fa-rupee-sign"></i> <%= booking.booking_price %></p>
         </div>
       </div>
+      <% end %>
     <% end %>
-  <% end %>
+  </div>
+
+
+
+
+
+
+
 </div>
