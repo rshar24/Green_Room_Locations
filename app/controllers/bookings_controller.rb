@@ -4,7 +4,6 @@ class BookingsController < ApplicationController
     @location = Location.find(params[:location_id])
     @booking.location = @location
     @booking.user = current_user
-    @main = @location.photos.find_by(main: true)
     if @booking.save
       redirect_to location_path(@location)
     else
