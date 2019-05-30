@@ -15,12 +15,6 @@ class LocationsController < ApplicationController
   def show
     @location = Location.find(params[:id])
     @booking = Booking.new
-
-      #  @markers = @locations.map do |location|
-      # {
-      #   lat: location.latitude,
-      #   lng: location.longitude
-      # }
   end
 
   def new
