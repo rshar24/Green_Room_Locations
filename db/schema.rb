@@ -47,6 +47,14 @@ ActiveRecord::Schema.define(version: 2019_05_29_073230) do
     t.index ["location_id"], name: "index_photos_on_location_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.text "content"
+    t.bigint "location_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_reviews_on_location_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -66,4 +74,5 @@ ActiveRecord::Schema.define(version: 2019_05_29_073230) do
   add_foreign_key "bookings", "users"
   add_foreign_key "locations", "users"
   add_foreign_key "photos", "locations"
+  add_foreign_key "reviews", "locations"
 end

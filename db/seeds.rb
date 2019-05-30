@@ -1,7 +1,3 @@
-
-
-
-
 20.times do
   user = User.new(
     email: Faker::Internet.email,
