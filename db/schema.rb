@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_29_050539) do
+
+ActiveRecord::Schema.define(version: 2019_05_29_073230) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "location_id"
+    t.bigint "user_id"
+    t.date "entry_date"
+    t.date "exit_date"
+    t.integer "booking_price"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_bookings_on_location_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
+  end
 
   create_table "locations", force: :cascade do |t|
     t.string "name"
@@ -23,6 +36,7 @@ ActiveRecord::Schema.define(version: 2019_05_29_050539) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "cover"
     t.index ["user_id"], name: "index_locations_on_user_id"
   end
 
@@ -31,7 +45,6 @@ ActiveRecord::Schema.define(version: 2019_05_29_050539) do
     t.bigint "location_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "main"
     t.index ["location_id"], name: "index_photos_on_location_id"
   end
 
@@ -58,6 +71,8 @@ ActiveRecord::Schema.define(version: 2019_05_29_050539) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "locations"
+  add_foreign_key "bookings", "users"
   add_foreign_key "locations", "users"
   add_foreign_key "photos", "locations"
   add_foreign_key "reviews", "locations"

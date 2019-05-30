@@ -4,7 +4,7 @@
       <% @locations.each do |location| %>
     <div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
       <div class="card-wraper" style=" background-color: white;">
-          <div class="card-img" style="background-image: url('<%= location.photos.first.url %>');">
+          <div class="card-img" style="background-image: url('<%= location.cover %>');">
             <h1 class="card-title"><h5><%= location.name %></h5></h1>
           <h6><%= location.address %></h6>
           </div>
