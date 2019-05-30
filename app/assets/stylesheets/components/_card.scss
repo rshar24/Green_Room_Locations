@@ -41,14 +41,13 @@
   border-color: #58c6da5e;
   bottom: 0px;
   right: 0px;
-  color: white;
-  font-weight:lighter;
+  color: #58c6da;
 }
 
-
 .card-btn:hover {
-  background-color: #b5b5b5;
+  background-color: red;
   border-color: #b5b5b5;
+
 }
 
 .card-action {
@@ -70,6 +69,7 @@ top: 0px;
 #display-cards {
   width:100%;
   position: relative;
+  left: 8px;
 }
 
 

@@ -5,8 +5,8 @@
 20.times do
   user = User.new(
     email: Faker::Internet.email,
-    first_name: Faker::Name.unique.name,
-    last_name: Faker::Name.unique.name,
+    first_name: ['Priya', 'Tanya', 'Priyanka','Divya', 'Tanvi','Ishita','vani', 'Anjali','Shreya', 'Riya', 'Rahul', 'Abhishek','Aditya', 'Amit', 'Mahesh', 'Rohit', 'Yash','Ankit', 'Shyam', 'Deepak'].sample,
+    last_name: ['Kumar', 'Lal', 'Sharma', 'Shan','Jai', 'Pal', 'Chande', 'Chander','Nara', 'Rai', 'Nath', 'Goel', 'Bhat', 'Raji', 'Anand', 'Suri', 'Kapoor','Chandra'].sample,
     password: "123456",
     password_confirmation: "123456",
   )
@@ -17,13 +17,26 @@
 
 
   location = Location.new(
-    name: Faker::FunnyName.three_word_name,
-    address: Faker::Address.city,
+    # name: Faker::FunnyName.three_word_name,
+    name: ["Taj Mahal", "Mysore Palace", "Harmandir Sahib",
+      "Brihadishwara Temple", "Bahai Temple", "Hawa Mahal",
+      "Chhatrapati Shivaji Terminus", "Victoria Memorial",
+      "Qutub Minar","Sanchi Stupa", "Gateway of India",
+      "Humayun’s Tomb", "Charminar", "Fatehpur Sikri",
+      "Ajanta Ellora Caves", "Mahabalipuram Monuments",
+      "Khajuraho Monuments","Jaisalmer Fort"].sample,
+    address: ["Mumbai", "Delhi", "Bangalore", "Hyderabad",
+      "Ahmedabad", "Chennai", "Kolkata",
+      "Surat","Pune", "Jaipur", "Lucknow", "Kanpur",
+      "Nagpur", "Indore", "Thane", "Bhopal",
+      "Visakhapatnam", "Pimpri & Chinchwad", "Patna",
+      "Vadodara", "Ghaziabad", "Ludhiana", "Agra", "Nashik",
+      "Faridabad", "Meerut", "Rajkot"].sample,
     price: rand(500..3000),
     description: Faker::Lorem.paragraph_by_chars(256, false),
     user_id: user.id,
-    latitude: Faker::Address.latitude,
-    longitude: Faker::Address.longitude,
+    # latitude: Faker::Address.latitude,
+    # longitude: Faker::Address.longitude,
     )
 
     location.remote_cover_url =

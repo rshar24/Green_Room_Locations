@@ -13,14 +13,27 @@ const buildMap = () => {
   mapboxgl.accessToken = mapElement.dataset.mapboxApiKey;
   return new mapboxgl.Map({
     container: 'map',
-    style: 'mapbox://styles/ficoag/cjwa4h97b0byg1cko54nou5so'
+    style: 'mapbox://styles/ficoag/cjwa4h97b0byg1cko54nou5so',
+    center: [28.1248, 38.907],
+    zoom: 0,
+    attributionControl: false
   });
 };
 
 const addMarkersToMap = (map, markers) => {
   markers.forEach((marker) => {
-    new mapboxgl.Marker()
+    const popup = new mapboxgl.Popup().setHTML(marker.infoWindow); // add this
+
+    const element = document.createElement('div');
+    element.className = 'marker';
+    element.style.backgroundImage = `url('https://image.flaticon.com/icons/png/512/190/190582.png')`;
+    element.style.backgroundSize = 'contain';
+    element.style.width = '35px';
+    element.style.height = '35px';
+
+    new mapboxgl.Marker(element)
       .setLngLat([ marker.lng, marker.lat ])
+      .setPopup(popup)
       .addTo(map);
   });
 };
@@ -28,7 +41,7 @@ const addMarkersToMap = (map, markers) => {
 const fitMapToMarkers = (map, markers) => {
   const bounds = new mapboxgl.LngLatBounds();
   markers.forEach(marker => bounds.extend([ marker.lng, marker.lat ]));
-  map.fitBounds(bounds, { padding: 10, maxZoom: 15 });
+  map.fitBounds(bounds, { padding: 10, maxZoom: 12 });
 };
 
 const initMapbox = () => {

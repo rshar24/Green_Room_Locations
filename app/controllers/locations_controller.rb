@@ -7,7 +7,9 @@ class LocationsController < ApplicationController
     @markers = @locations.map do |location|
       {
         lat: location.latitude,
-        lng: location.longitude
+        lng: location.longitude,
+        infoWindow: render_to_string(partial: "infowindow", locals: { location: location }),
+
       }
     end
   end
@@ -34,6 +36,16 @@ class LocationsController < ApplicationController
 
   def edit
     @location = Location.find(params[:id])
+  end
+
+  def update
+    @location = Location.find(params[:id])
+    @location.update(location_params)
+    if @location.save
+      redirect_to location_path(@location)
+    else
+      render :edit
+    end
   end
 
   private
