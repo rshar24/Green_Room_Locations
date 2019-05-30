@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>Booking Confirmed</h2>
+  <div class="card-trip">
+    <%= cl_image_tag @booking.location.cover %>
+    <div class="card-trip-infos">
+      <div>
+        <h2 class="py-2"><%= @booking.location.name %></h2>
+        <p class="py-1"><%= @booking.location.address %></p>
+        <p class="py-1">Booking for:</p>
+        <p class="py-1">Start Date: <%= @booking.entry_date %></p>
+        <p class="py-1">End Date: <%= @booking.exit_date %></p>
+        <p class="py-1">Renter: <%= @booking.user.first_name %> <%= @booking.user.last_name %></p>
+        <p class="py-1">Owner: <%= @booking.location.user.first_name %> <%= @booking.location.user.last_name %></p>
+      </div>
+      <h2 class="card-trip-pricing"><i class="fas fa-rupee-sign"></i> <%= @booking.booking_price %></h2>
+      <%= cl_image_tag current_user.photo, height: 80, width: 80, :crop=>"thumb", :gravity=>"faces", class: "card-trip-user avatar-bordered" %>
+    </div>
+  </div>
+</div>

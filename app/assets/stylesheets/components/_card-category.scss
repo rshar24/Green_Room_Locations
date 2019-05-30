@@ -13,6 +13,11 @@
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
+.nounderline {
+  text-decoration: none !important;
+  color: black;
+}
+
 .nounderline:hover {
   text-decoration: none !important;
 }
