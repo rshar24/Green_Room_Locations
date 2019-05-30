@@ -1,0 +1,18 @@
+<%= link_to location_path(location), { class: "nounderline" } do %>
+<div class="infowindow-pop">
+  <div class="">
+    <div>
+      <h5><%= location.name %></h5>
+    </div>
+    <div>
+      <img class="img-map" src="<%= location.cover %>" alt="">
+    </div>
+    <div>
+      <h6><%= location.address %></h6>
+    </div>
+    <div>
+      <p><i class="fas fa-rupee-sign"></i> <%= location.price %></p>
+    </div>
+  </div>
+</div>
+<% end %>
