@@ -1,3 +1,29 @@
+.card-banner {
+  height: 70vh;
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 20px;
+  padding-left: 20%;
+  padding-top: 15%;
+}
+
+.card-ban-title {
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.index-btn {
+  background-color: #58c6dabf;
+  border-color: #58c6da5e;
+}
+
+.index-btn:hover {
+  background-color: #b5b5b5;
+  border-color: #b5b5b5;
+}
+
+
 .card-img {
   height: 200px;
   background-size: cover;
@@ -19,9 +45,27 @@
   font-weight:lighter;
 }
 
+
+.card-btn:hover {
+  background-color: #b5b5b5;
+  border-color: #b5b5b5;
+}
+
 .card-action {
     display: flex;
     justify-content: space-between;
     padding: 8px 20px;
     align-items: center;
+}
+
+
+#map {
+margin-bottom: 20px;
+position: relative;
+}
+
+#locations-title {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
 }

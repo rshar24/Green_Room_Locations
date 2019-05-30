@@ -32,10 +32,17 @@
         <%= f.input :exit_date, as: :date, html5: true %>
       </div>
       <div class="form-actions">
-        <%= f.button :submit, class: "btn btn-primary" %>
+        <%= f.button :submit, class: "create-btn btn btn-primary" %>
       </div>
     <% end %>
   </div>
+</div>
+<div
+  id="map"
+  style="width: 100%;
+  height: 500px;"
+  data-markers="<%= @markers.to_json %>"
+  data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
 </div>
 
 <div class="container">

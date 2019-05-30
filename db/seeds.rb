@@ -21,7 +21,9 @@
     address: Faker::Address.city,
     price: rand(500..3000),
     description: Faker::Lorem.paragraph_by_chars(256, false),
-    user_id: user.id
+    user_id: user.id,
+    latitude: Faker::Address.latitude,
+    longitude: Faker::Address.longitude,
     )
 
     location.remote_cover_url =

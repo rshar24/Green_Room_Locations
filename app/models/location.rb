@@ -4,4 +4,7 @@ class Location < ApplicationRecord
 
   validates :user, presence: true
   mount_uploader :cover, PhotoUploader
+
+  geocoded_by :address
+  after_validation :geocode, if: :will_save_change_to_address?
 end

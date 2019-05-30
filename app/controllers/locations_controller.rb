@@ -1,11 +1,27 @@
 class LocationsController < ApplicationController
   def index
     @locations = Location.all
+
+    @locations = Location.where.not(latitude: nil, longitude: nil)
+
+    @markers = @locations.map do |location|
+      {
+        lat: location.latitude,
+        lng: location.longitude
+      }
+    end
   end
 
   def show
     @location = Location.find(params[:id])
     @booking = Booking.new
+
+     @markers = @locations.map do |location|
+      {
+        lat: location.latitude,
+        lng: location.longitude
+      }
+
   end
 
   def new
