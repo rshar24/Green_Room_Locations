@@ -1,4 +1,5 @@
 class LocationsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show]
   def index
     @locations = Location.all
 
@@ -21,10 +22,12 @@ class LocationsController < ApplicationController
 
   def new
     @location = Location.new
+    authorize @location
   end
 
   def create
     @location = Location.new(location_params)
+    authorize @location
     @location.user = current_user
 
     if @location.save
@@ -36,6 +39,7 @@ class LocationsController < ApplicationController
 
   def edit
     @location = Location.find(params[:id])
+    authorize @location
   end
 
   def update
