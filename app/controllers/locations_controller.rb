@@ -51,7 +51,7 @@ class LocationsController < ApplicationController
   private
 
   def set_locations
-    @locations = Locations.find(params[:id])
+    @locations = Location.find(params[:id])
   end
 
   def location_params
