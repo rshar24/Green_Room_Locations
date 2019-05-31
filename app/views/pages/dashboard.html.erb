@@ -47,7 +47,7 @@
         <% end %>
         <div class="pr-3 dashboard-review">
           <% if !booking.review %>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#reviewModal-<%= booking.id %>">
+            <button type="button" class="btn btn-primary modal-review-button" data-booking="<%= booking.id %>" data-toggle="modal" data-target="#reviewModal">
               Leave a Review
             </button>
             <% else %>
@@ -67,32 +67,6 @@
           <% end %>
         </div>
 
-  <!-- Review Modal -->
-
-        <div class="modal fade" id="reviewModal-<%= booking.id %>" tabindex="-1" role="dialog" aria-labelledby="ReviewModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="ReviewModalLabel">Leave a Review</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <%= simple_form_for [booking, @review] do |f| %>
-                <div class="form-inputs">
-                  <%= f.input :content %>
-                  <%= f.input :rating, input_html: { min: '0', max: '5' } %>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <%= f.button :submit, class: "btn btn-primary" %>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <% end %>
     </div>
@@ -115,7 +89,45 @@
     </div>
   </div>
 
+  <!-- Review Modal -->
+
+        <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="ReviewModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ReviewModalLabel">Leave a Review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= simple_form_for [Booking.first, @review] do |f| %>
+                <div class="form-inputs">
+                  <%= f.input :content %>
+                  <%= f.input :rating, input_html: { min: '0', max: '5' } %>
+                  <div class="mb-4">
+                    <i class="far fa-star star_rating"></i><i class="far fa-star star_rating"></i><i class="far fa-star star_rating"></i><i class="far fa-star star_rating"></i><i class="far fa-star star_rating"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <%= f.button :submit, class: "btn btn-primary" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 <script>
+  let buttons = document.querySelectorAll(".modal-review-button");
+  let form = document.querySelector("#new_review")
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      let url = `bookings/${e.target.dataset.booking}/reviews`;
+      form.action = url;
+    });
+  });
   document.querySelector("#review_rating").style.display = "none";
   let stars = document.querySelectorAll(".star_rating");
   stars.forEach((element, index) => {
