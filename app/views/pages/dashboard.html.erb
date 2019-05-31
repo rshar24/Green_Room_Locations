@@ -11,30 +11,31 @@
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="location" role="tabpanel" aria-labelledby="location-tab">
-    <h3 class="mt-4">My Locations</h3>
-    <% @locations.each do |location| %>
+    <div class="tab-pane fade show active" id="location" role="tabpanel" aria-labelledby="location-tab">
+      <h3 class="mt-4">My Locations</h3>
+      <% @locations.each do |location| %>
       <%= link_to location_path(location), { class: "nounderline" } do %>
-        <div class="card-product my-2">
-          <%= cl_image_tag location.cover, class: "img" %>
-          <div class="card-product-infos nounderline">
-            <h2><%= location.name %></h2>
-            <p><%= location.address %></p>
-            <p>Daily price: <i class="fas fa-rupee-sign"></i> <%= location.price %></p>
-          </div>
+      <div class="card-product my-2">
+        <%= cl_image_tag location.cover, class: "img" %>
+        <div class="card-product-infos nounderline">
+          <h2><%= location.name %></h2>
+          <p><%= location.address %></p>
+          <p>Daily price: <i class="fas fa-rupee-sign"></i> <%= location.price %></p>
         </div>
+      </div>
       <% end %>
-    <% end %>
-    <% if policy(Location).create? %>
+      <% end %>
+      <% if policy(Location).create? %>
       <%= link_to "New Location", new_location_path %>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
 
-  <div class="tab-pane fade" id="bookings-made" role="tabpanel" aria-labelledby="bookings-made-tab">
-    <h3 class="mt-4">Bookings Made</h3>
-    <% @bookings_made.each do |booking| %>
-      <%= link_to booking_path(booking), { class: "nounderline" } do %>
-        <div class="card-product my-2">
+    <div class="tab-pane fade" id="bookings-made" role="tabpanel" aria-labelledby="bookings-made-tab">
+      <h3 class="mt-4">Bookings Made</h3>
+      <% @bookings_made.each do |booking| %>
+      <div class="card-product my-2 d-flex justify-content-between">
+        <%= link_to booking_path(booking), { class: "nounderline" } do %>
+        <div class="d-flex">
           <%= cl_image_tag booking.location.cover, class: "img" %>
           <div class="card-product-infos nounderline">
             <h2><%= booking.location.name %></h2>
@@ -43,13 +44,36 @@
             <p>Total price: <i class="fas fa-rupee-sign"></i> <%= booking.booking_price %></p>
           </div>
         </div>
-      <% end %>
-    <% end %>
-  </div>
+        <% end %>
+        <div class="pr-3 dashboard-review">
+          <% if !booking.review %>
+            <button type="button" class="btn btn-primary modal-review-button" data-booking="<%= booking.id %>" data-toggle="modal" data-target="#reviewModal">
+              Leave a Review
+            </button>
+            <% else %>
+            <div>
+              <h3>Your review:</h3>
+              <p><% booking.review.rating.times do %>
+                  <i class="fas fa-star"></i>
+                <% end %>
+                <% (5 - booking.review.rating).times do %>
+                  <i class="far fa-star"></i>
+                <% end %>
+              </p>
+            </div>
+            <div>
+              <p><%= booking.review.content %></p>
+            </div>
+          <% end %>
+        </div>
 
-  <div class="tab-pane fade" id="bookings-received" role="tabpanel" aria-labelledby="bookings-received-tab">
-    <h3 class="mt-4">Bookings Received</h3>
-    <% @bookings_rec.each do |booking| %>
+      </div>
+      <% end %>
+    </div>
+
+    <div class="tab-pane fade" id="bookings-received" role="tabpanel" aria-labelledby="bookings-received-tab">
+      <h3 class="mt-4">Bookings Received</h3>
+      <% @bookings_rec.each do |booking| %>
       <%= link_to booking_path(booking), { class: "nounderline" } do %>
       <div class="card-product my-2">
         <%= cl_image_tag booking.location.cover, class: "img" %>
@@ -61,13 +85,61 @@
         </div>
       </div>
       <% end %>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 
+  <!-- Review Modal -->
 
-
-
-
-
-
-</div>
+        <div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="ReviewModalLabel" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="ReviewModalLabel">Leave a Review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= simple_form_for [Booking.first, @review] do |f| %>
+                <div class="form-inputs">
+                  <%= f.input :content %>
+                  <%= f.input :rating, input_html: { min: '0', max: '5' } %>
+                  <div class="mb-4">
+                    <i class="far fa-star star_rating"></i><i class="far fa-star star_rating"></i><i class="far fa-star star_rating"></i><i class="far fa-star star_rating"></i><i class="far fa-star star_rating"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <%= f.button :submit, class: "btn btn-primary" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<script>
+  let buttons = document.querySelectorAll(".modal-review-button");
+  let form = document.querySelector("#new_review")
+  buttons.forEach((button) => {
+    button.addEventListener("click", (e) => {
+      let url = `bookings/${e.target.dataset.booking}/reviews`;
+      form.action = url;
+    });
+  });
+  document.querySelector("#review_rating").style.display = "none";
+  let stars = document.querySelectorAll(".star_rating");
+  stars.forEach((element, index) => {
+    element.addEventListener("click", (event) => {
+      stars.forEach((item, itemIndex) => {
+        item.classList.add("far");;
+        if (itemIndex <= index) {
+          item.classList.remove("far");;
+          item.classList.add("fas");
+          document.querySelector("#review_rating").value = itemIndex + 1;
+        }
+      });
+    });
+  });
+</script>
