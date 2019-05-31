@@ -1,18 +1,21 @@
 class LocationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-    @locations = Location.all
-
-    @locations = Location.where.not(latitude: nil, longitude: nil)
-
-    @markers = @locations.map do |location|
-      {
-        lat: location.latitude,
-        lng: location.longitude,
-        infoWindow: render_to_string(partial: "infowindow", locals: { location: location }),
-
-      }
+if params[:query].present?
+      sql_query = " \
+        locations.name ILIKE :query \
+        OR locations.address ILIKE :query \
+        OR locations.description ILIKE :query \
+        OR users.first_name ILIKE :query \
+        OR users.last_name ILIKE :query \
+      "
+      @locations = Location.joins(:user).where(sql_query, query: "%#{params[:query]}%").where.not(latitude: nil, longitude: nil)
+      set_markers
+    else
+      @locations = Location.all
+      set_markers
     end
+
   end
 
   def show
@@ -53,6 +56,16 @@ class LocationsController < ApplicationController
   end
 
   private
+
+  def set_markers
+    @markers = @locations.map do |location|
+        {
+          lat: location.latitude,
+          lng: location.longitude,
+          infoWindow: render_to_string(partial: "infowindow", locals: { location: location }),
+        }
+    end
+  end
 
   def set_locations
     @locations = Location.find(params[:id])
