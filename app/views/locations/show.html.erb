@@ -1,6 +1,21 @@
 <div class="d-flex">
   <div class="big-name">
-    <p><%= @location.name %></p>
+    <h1><%= @location.name %></h1>
+    <p><strong>Rating: </strong> <%= @avg_rating_dec %>
+        <% @average_rating.floor.times do %>
+          <i class="fas fa-star"></i>
+        <% end %>
+        <% if (@average_rating / 0.5).to_i.odd? %>
+          <i class="fas fa-star-half-alt"></i>
+          <% (5 - @average_rating).floor.times do %>
+            <i class="far fa-star"></i>
+          <% end %>
+        <% else %>
+          <% (5 - @average_rating).floor.times do %>
+            <i class="far fa-star"></i>
+          <% end %>
+        <% end %>
+      (<%= @no_of_reviews %>)</p>
   </div>
   <div class="show-img text-right pr-5" style="background-image: url('<%= @location.cover %>');">
     <% if @location.user == current_user %>
@@ -53,6 +68,22 @@
       <div class="col-4 mt-2 ">
         <div class="card-img" style="background-image: url('<%= photo.picture %>');">
         </div>
+      </div>
+      <% end %>
+    </div>
+    <div class="reviews pt-4">
+      <h3>Reviews (<%= @no_of_reviews %>)</h3>
+      <% @location.reviews.each do |review| %>
+      <div class="border p-3 my-3 rounded review-card">
+        <p><strong>Rating: </strong>
+          <% review.rating.times do %>
+            <i class="fas fa-star"></i>
+          <% end %>
+          <% (5 - review.rating).times do %>
+            <i class="far fa-star"></i>
+          <% end %>
+        </p>
+        <p><%= review.content %></p>
       </div>
       <% end %>
     </div>

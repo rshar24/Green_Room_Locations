@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-if params[:query].present?
+    if params[:query].present?
       sql_query = " \
         locations.name ILIKE :query \
         OR locations.address ILIKE :query \
@@ -11,17 +11,18 @@ if params[:query].present?
       "
       @locations = Location.joins(:user).where(sql_query, query: "%#{params[:query]}%").where.not(latitude: nil, longitude: nil)
       set_markers
-
     else
-      @locations = Location.all
+      @locations = Location.all.first(3)
       set_markers
     end
-
   end
 
   def show
     @location = Location.find(params[:id])
     @booking = Booking.new
+    @average_rating = @location.avg_rating
+    @no_of_reviews = @location.reviews_count
+    @avg_rating_dec = @location.avg_rating_dec
   end
 
   def new
