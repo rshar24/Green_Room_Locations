@@ -12,7 +12,7 @@ class LocationsController < ApplicationController
       @locations = Location.joins(:user).where(sql_query, query: "%#{params[:query]}%").where.not(latitude: nil, longitude: nil)
       set_markers
     else
-      @locations = Location.all.first(3)
+      @locations = Location.all
       set_markers
     end
   end
