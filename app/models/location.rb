@@ -1,7 +1,8 @@
 class Location < ApplicationRecord
   belongs_to :user
   has_many :photos
-  validates :user, presence: true
+  validates :name, :address, :price, :user, :description, :cover, presence: true
+
   mount_uploader :cover, PhotoUploader
 
   geocoded_by :address
