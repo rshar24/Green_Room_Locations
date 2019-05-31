@@ -13,7 +13,7 @@
         <p class="py-1">Owner: <%= @booking.location.user.first_name %> <%= @booking.location.user.last_name %></p>
       </div>
       <h2 class="card-trip-pricing"><i class="fas fa-rupee-sign"></i> <%= @booking.booking_price %></h2>
-      <%= cl_image_tag current_user.photo, height: 80, width: 80, :crop=>"thumb", :gravity=>"faces", class: "card-trip-user avatar-bordered" %>
+      <%= cl_image_tag @booking.location.user.photo, height: 80, width: 80, :crop=>"thumb", :gravity=>"faces", class: "card-trip-user avatar-bordered" %>
     </div>
   </div>
 </div>

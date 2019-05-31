@@ -1,6 +1,7 @@
 class Booking < ApplicationRecord
   belongs_to :location
   belongs_to :user
+  has_one :review
   validates :entry_date, presence: true
   validates :exit_date, presence: true
   validate :not_blank_date
