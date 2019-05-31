@@ -1,7 +1,7 @@
 class LocationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:index, :show]
   def index
-if params[:query].present?
+    if params[:query].present?
       sql_query = " \
         locations.name ILIKE :query \
         OR locations.address ILIKE :query \
@@ -16,7 +16,6 @@ if params[:query].present?
       @locations = Location.all
       set_markers
     end
-
   end
 
   def show
@@ -60,11 +59,11 @@ if params[:query].present?
 
   def set_markers
     @markers = @locations.map do |location|
-        {
-          lat: location.latitude,
-          lng: location.longitude,
-          infoWindow: render_to_string(partial: "infowindow", locals: { location: location }),
-        }
+      {
+        lat: location.latitude,
+        lng: location.longitude,
+        infoWindow: render_to_string(partial: "infowindow", locals: { location: location }),
+      }
     end
   end
 
