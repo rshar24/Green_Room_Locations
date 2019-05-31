@@ -9,7 +9,6 @@ class BookingsController < ApplicationController
       redirect_to booking_path(@booking)
     else
       render template: "locations/show"
-
     end
   end
 
