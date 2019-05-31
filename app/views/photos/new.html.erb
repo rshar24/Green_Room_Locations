@@ -1,0 +1,21 @@
+<div class="new-location-container">
+  <div class="container col-5">
+    <div class="back-color">
+        <div class="new-form">
+          <h3 class="text-center pb-4">Upload photo.</h3>
+          <%= simple_form_for([@location, @photo]) do |f| %>
+            <%= f.error_notification %>
+
+            <div class="form-inputs">
+
+
+              <%= f.input :picture  %>
+              <%= f.input :picture_cache, as: :hidden %>
+              <%= f.button :submit, class: "text-white btn btn-primary new-button" %>
+            </div>
+          <% end %>
+        </div>
+    </div>
+  </div>
+</div>
+</div>

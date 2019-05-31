@@ -3,7 +3,9 @@
     <p><%= @location.name %></p>
   </div>
   <div class="show-img text-right pr-5" style="background-image: url('<%= @location.cover %>');">
-    <a href="#" class="show-btn btn btn-primary text-right">Photos</a>
+    <% if @location.user == current_user %>
+    <%= link_to "upload photos", new_location_photo_path(@location.id), class: "show-btn btn btn-primary text-right"  %>
+    <% end %>
   </div>
 </div>
 
@@ -49,7 +51,7 @@
     <div class="row">
       <% @location.photos.each do |photo| %>
       <div class="col-4 mt-2 ">
-        <div class="card-img" style="background-image: url('<%= photo.url %>');">
+        <div class="card-img" style="background-image: url('<%= photo.picture %>');">
         </div>
       </div>
       <% end %>
