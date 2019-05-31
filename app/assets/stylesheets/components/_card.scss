@@ -23,7 +23,18 @@
   border-color: #b5b5b5;
 }
 
+.cards-index {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  width: 90%;
+  max-height: 230px;
+  margin-left: 10px;
+}
 
+.main-container {
+  display: flex;
+}
 .card-img {
   height: 200px;
   background-size: cover;
@@ -51,10 +62,10 @@
 }
 
 .card-action {
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 20px;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 20px;
+  align-items: center;
 }
 
 
@@ -66,10 +77,6 @@ top: 0px;
 
 }
 
-#display-cards {
-  width:100%;
-  position: relative;
-  left: 8px;
-}
+//
 
 

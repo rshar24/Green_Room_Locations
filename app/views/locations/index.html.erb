@@ -6,32 +6,33 @@
 </div>
 
 
-<div class="d-flex">
-    <div class="row" id="display-cards">
-        <% @locations.each do |location| %>
-        <%= link_to location_path(location), { class: "nounderline" } do %>
-          <div class="col-6">
-            <div class="card-wraper" style=" background-color: white;">
-              <div class="card-img" style="background-image: url('<%= location.cover %>');">
-                <h1 class="card-title"><h5><%= location.name %></h5></h1>
-                <h6><%= location.address %></h6>
-              </div>
-              <div class="card-action">
-                <div>
-                  <i class="fas fa-rupee-sign"></i> <%= location.price %>
-                </div>
+
+<div class="main-container">
+  <div class="cards-index">
+      <% @locations.each do |location| %>
+      <%= link_to location_path(location), { class: "nounderline" } do %>
+        <div class="card">
+          <div class="card-wraper" style=" background-color: white;">
+            <div class="card-img" style="background-image: url('<%= location.cover %>');">
+              <h1 class="card-title"><h5><%= location.name %></h5></h1>
+              <h6><%= location.address %></h6>
+            </div>
+            <div class="card-action">
+              <div>
+                <i class="fas fa-rupee-sign"></i> <%= location.price %>
               </div>
             </div>
-           <% end %>
           </div>
-        <% end %>
-    </div>
-    <div
-      id="map"
-      style="width: 100%;
-      height: 100vh;"
-      data-markers="<%= @markers.to_json %>"
-      data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
-    </div>
+        </div>
+         <% end %>
+      <% end %>
+  </div>
+  <div
+    id="map"
+    style="width: 60%;
+    height: 100vh;"
+    data-markers="<%= @markers.to_json %>"
+    data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
 </div>
+
